@@ -1,0 +1,5 @@
+*.pth
+weights/
+__pycache__/
+*.pyc
+*.pyo
