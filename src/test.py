@@ -8,7 +8,8 @@ from postprocessing import (
     adaptive_road_filling,
     refine_road_with_edges,
     directional_road_filter,
-    contour_simplification
+    contour_simplification,
+    uncertainty_based_road_refine
 )
 ######################################################################################
 
@@ -100,6 +101,7 @@ def main():
 
         # ✅ 2. 엣지 기반 후처리 적용
         edge_map = create_edge_map(image, low_threshold=200, high_threshold=400)
+        prediction = uncertainty_based_road_refine(prediction, softmax_output, threshold = 0.7)
 
         refined_prediction = adaptive_road_filling(prediction, softmax_output, base_threshold=0.08, road_class=1)
         refined_prediction = refine_road_with_edges(refined_prediction, softmax_output, edge_map, threshold=0.3,

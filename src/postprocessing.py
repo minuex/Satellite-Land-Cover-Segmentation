@@ -143,3 +143,26 @@ def contour_simplification(label_map, epsilon, road_class = 1):
 
     return refined_label_map
 
+
+# 도로 중점 불확실성 기반 후처리
+def uncertainty_based_road_refine(prediction, softmax_output, threshold):
+    refined_prediction = prediction.copy()
+
+    # 도로 클래스(1)에서 확신이 낮은 픽셀 찾기
+    road_class = 1
+    max_confidence = np.max(softmax_output, axis=1)
+    uncertainty_mask = (prediction == road_class) & (max_confidence < threshold)
+    uncertainty_mask = np.squeeze(uncertainty_mask.astype(bool))
+
+    # 주변 픽셀에서 가장 많이 등장하는 클래스로 보정
+    height, width = prediction.shape
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
+
+    for y in range(1, height - 1):
+        for x in range(1, width - 1):
+            if uncertainty_mask[y, x]:
+                surrounding_labels = [prediction[y + dy, x + dx] for dy, dx in directions]
+                refined_prediction[y, x] = np.bincount(surrounding_labels).argmax()  # 다수결 결정
+
+    return refined_prediction
+
