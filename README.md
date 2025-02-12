@@ -47,70 +47,11 @@ To enhance model performance, several postprocessing methods were applied:
 - The ensemble of UNet++ and SegFormer significantly improved road segmentation accuracy, outperforming individual models by effectively capturing both fine details and global context.
 
 ## Model Performance Comparison
-
-Model
-
-Mean IoU
-
-Pixel Accuracy
-
-Building IoU
-
-Road IoU
-
-Field IoU
-
-Forest IoU
-
-Background IoU
-
-Segformer B3
-
-0.5305
-
-0.8159
-
-0.7081
-
-0.5539
-
-0.7557
-
-0.7620
-
-0.7974
-
-Selective Ensemble
-
-0.5514
-
-0.8307
-
-0.7357
-
-0.6575
-
-0.7732
-
-0.7457
-
-0.8110
-
-Improvement
-
-🔺 +2.09%
-
-🔺 +1.81%
-
-🔺 +2.76%
-
-🔺 +10.36%
-
-🔺 +1.75%
-
-🔻 -2.13%
-
-🔺 +1.71%
+| Model                | Mean IoU | Pixel Accuracy | Building IoU | Road IoU | Field IoU | Forest IoU | Background IoU |
+|----------------------|---------|---------------|--------------|----------|----------|-----------|---------------|
+| Segformer B3        | 0.5305  | 0.8159        | 0.7081       | 0.5539   | 0.7557   | 0.7620    | 0.7974        |
+| Selective Ensemble  | 0.5514  | 0.8307        | 0.7357       | 0.6575   | 0.7732   | 0.7457    | 0.8110        |
+| **Improvement**     | 🔺 +2.09% | 🔺 +1.81% | 🔺 +2.76% | 🔺 +10.36% | 🔺 +1.75% | 🔻 -2.13% | 🔺 +1.71% |
 
 ## Contributors
 
