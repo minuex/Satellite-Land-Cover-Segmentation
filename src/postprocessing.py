@@ -48,19 +48,19 @@ def refine_labels(edge_map, label_map, num_classes, class_mapping):
                 # 예: 연속된 레이블 변화 확인, 레이블 지배도 검사 등
     return refined_label_map
 ############################################################
-#소프트 맥스 확률값 적용
+# 소프트 맥스 확률값 적용
 def adaptive_road_filling(prediction, softmax_output, base_threshold, road_class):
     refined_prediction = prediction.copy()
     road_prob = softmax_output[0, road_class, :, :]
 
-    # ✅ 적응형 임계값 적용 (도로 중심부 vs 경계부)
+    # 적응형 임계값 적용 (도로 중심부 vs 경계부)
     high_confidence_threshold = 0.5  # 중심부
-    low_confidence_threshold = base_threshold  # 경계부 (기본값)
+    low_confidence_threshold = base_threshold  # 경계부 (=기본값)
 
-    # 1️⃣ 기존 도로 영역 확장
+    # 기존 도로 영역 확장
     high_confidence_mask = (road_prob > high_confidence_threshold) & (prediction == road_class)
 
-    # 2️⃣ 주변 도로 예측을 확장 (False Positive 방지)
+    # 주변 도로 예측을 확장
     low_confidence_mask = (road_prob > low_confidence_threshold) & (prediction != road_class)
 
     refined_prediction[high_confidence_mask] = road_class
@@ -74,11 +74,13 @@ def refine_road_with_edges(prediction, softmax_output, edge_map, threshold, road
     refined_prediction = prediction.copy()
     road_prob = softmax_output[0, road_class, :, :]
 
-    # ✅ 도로 예측값이 threshold 이상이고, 엣지맵에서도 검출된 영역만 보정
+    # 도로 예측값이 threshold 이상이고, 엣지맵에서도 검출된 영역만 보정
     edge_road_mask = (road_prob > threshold) & (edge_map > 0)
 
     refined_prediction[edge_road_mask] = road_class
     return refined_prediction
+
+########################################################################
 
 # 방향성 고려하여 보정 (PCA 기반)
 def directional_road_filter(label_map, road_class, min_length, angle_threshold, neighborhood_size):
@@ -127,10 +129,12 @@ def directional_road_filter(label_map, road_class, min_length, angle_threshold, 
 
     return refined_label_map
 
+#########################################################################################
+
 # 컨투어링 직선화
 def contour_simplification(label_map, epsilon, road_class = 1):
     refined_label_map = np.copy(label_map)
-    # 도로(1) 클래스만 선택
+    # 도로 클래스만 선택
     road_mask = (label_map == road_class).astype(np.uint8)
     contours, _ = cv2.findContours(road_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_KCOS)
 
@@ -143,6 +147,7 @@ def contour_simplification(label_map, epsilon, road_class = 1):
 
     return refined_label_map
 
+#######################################################################################
 
 # 도로 중점 불확실성 기반 후처리
 def uncertainty_based_road_refine(prediction, softmax_output, threshold):

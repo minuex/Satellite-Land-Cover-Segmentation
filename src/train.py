@@ -25,7 +25,7 @@ def train(model, train_loader, valid_loader, criterion, optimizer, num_epochs):
             outputs = model(images)
             loss = criterion(outputs, masks)
 
-            # TensorBoard 기록
+            # 텐서보드
             log_train_loss(loss.item(), epoch, progress_bar.n, train_loader)
 
             # Backward pass
@@ -43,7 +43,7 @@ def train(model, train_loader, valid_loader, criterion, optimizer, num_epochs):
             model, valid_loader, criterion, num_classes, best_loss, no_improvement_epochs, class_names
         )
 
-        # TensorBoard: Validation Loss 기록
+        # 텐서보드
         log_validation_loss(avg_val_loss, epoch)
 
         # 10 에폭마다 모델 저장

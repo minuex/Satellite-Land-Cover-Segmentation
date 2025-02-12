@@ -99,7 +99,7 @@ def main():
         softmax_output = np.expand_dims(final_prob, axis=0)
         prediction = final_prediction
 
-        # ✅ 2. 엣지 기반 후처리 적용
+        # ✅ 엣지 기반 후처리 적용
         edge_map = create_edge_map(image, low_threshold=200, high_threshold=400)
         prediction = uncertainty_based_road_refine(prediction, softmax_output, threshold = 0.7)
 
@@ -112,7 +112,7 @@ def main():
 
         refined_prediction = contour_simplification(refined_prediction, epsilon=0.9, road_class=1)
 
-        # ✅ 4. Torch Tensor 변환
+        # ✅ Torch Tensor 변환
         refined_prediction = torch.tensor(refined_prediction, dtype = torch.long).cpu()
 
 #####################################################################################################
