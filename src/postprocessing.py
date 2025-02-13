@@ -47,13 +47,13 @@ def refine_labels(edge_map, label_map, num_classes, class_mapping):
 
                 # 예: 연속된 레이블 변화 확인, 레이블 지배도 검사 등
     return refined_label_map
-############################################################
+######################################################################################################################
 # 소프트 맥스 확률값 적용
 def adaptive_road_filling(prediction, softmax_output, base_threshold, road_class):
     refined_prediction = prediction.copy()
     road_prob = softmax_output[0, road_class, :, :]
 
-    # 적응형 임계값 적용 (도로 중심부 vs 경계부)
+    #임계값 적용 (도로 중심부,경계부 따로 적용)
     high_confidence_threshold = 0.5  # 중심부
     low_confidence_threshold = base_threshold  # 경계부 (=기본값)
 
@@ -170,4 +170,23 @@ def uncertainty_based_road_refine(prediction, softmax_output, threshold):
                 refined_prediction[y, x] = np.bincount(surrounding_labels).argmax()  # 다수결 결정
 
     return refined_prediction
+
+###################################################################################################
+# 스켈레톤화
+def skeletonize_opencv(binary_mask):
+    binary_mask = binary_mask.astype(np.uint8)
+    skeleton = np.zeros_like(binary_mask)  # 빈 이미지 생성
+    temp = binary_mask.copy()
+
+    # OpenCV_Morphological Thinning 적용
+    while True:
+        eroded = cv2.erode(temp, np.ones((3, 3), np.uint8))
+        temp = temp - eroded
+        skeleton = np.maximum(skeleton, temp)
+        temp = eroded.copy()
+        if cv2.countNonZero(temp) == 0:
+            break
+
+    return skeleton
+
 
