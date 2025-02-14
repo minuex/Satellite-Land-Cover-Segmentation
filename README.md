@@ -146,8 +146,7 @@ pip install rasterio segmentation-models-pytorch torch torchvision numpy opencv-
 
 ## Contributors
 
-[김민서] - [as09003@naver.com / minuex]
-
+[김민서] - [as09003@naver.com / https://github.com/minuex](https://github.com/minuex)
 
 ## License
 
