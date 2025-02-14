@@ -138,15 +138,14 @@ To enhance model performance, several postprocessing methods were applied:
 
 
 ## Installation 
-'''
-pip install rasterio segmentation-models-pytorch torch torchvision numpy opencv-python matplotlib
+'''pip install rasterio segmentation-models-pytorch torch torchvision numpy opencv-python matplotlib
 '''
 
 
 
 ## Contributors
 
-[김민서] - [as09003@naver.com / https://github.com/minuex](https://github.com/minuex)
+[김민서] - [https://github.com/minuex](https://github.com/minuex)
 
 ## License
 
