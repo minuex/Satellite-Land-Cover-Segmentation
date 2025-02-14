@@ -3,6 +3,8 @@ Semantic segmentation of satellite imagery to classify land cover types using de
 
 ![Image](https://github.com/user-attachments/assets/8291f340-3786-4e67-88e4-a1dcfa63bae4)
 
+
+
 ## Overview
 
 This project focuses on land cover segmentation using deep learning models. It compares the performance of DeepLabv3+, UNet++, and SegFormer in classifying land cover types based on 10m satellite imagery. 
@@ -10,6 +12,8 @@ The goal is to evaluate their effectiveness and improve generalization through p
 Additionally, this project aims to build a satellite imagery processing pipeline for potential use in Unreal Engine, enabling integration of high-resolution land cover data into 3D environments.
 
 ![Image](https://github.com/user-attachments/assets/f5d1ec33-3e7d-41d3-8bf2-1292984ae1dd)
+
+
 
 ## Dataset
 
@@ -27,6 +31,8 @@ The project uses two datasets:
 - AIHub Dataset: A preprocessed dataset with high segmentation accuracy.
 
 - Field Dataset: A custom dataset collected for real-world testing, exhibiting domain differences from AIHub.
+
+
 
 ## Model Architectures
 
@@ -57,6 +63,8 @@ The project uses two datasets:
 | Forest IoU | 0.7072     | 0.6758 | 0.7620       |
 | Background IoU | 0.7779 | 0.8010 | 0.7974       |
 
+
+
 ## Preprocessing Techniques
 
 ![Image](https://github.com/user-attachments/assets/27e30128-ecc9-4d36-9550-07dd76f9e0a3)
@@ -66,6 +74,7 @@ The project uses two datasets:
 2. Saturation Enhancement: Increased contrast in green regions (forests, farmlands) to better differentiate between classes.
 
 3. CLAHE (Contrast Limited Adaptive Histogram Equalization): Ensured balanced contrast in areas with shadows or significant brightness variations.
+
 
 
 ## Postprocessing Techniques (Road Class)
@@ -88,6 +97,8 @@ To enhance model performance, several postprocessing methods were applied:
 | With Postprocessing | 0.6285  | 0.8565        | 0.4707       | 0.4162   | 0.6266   | 0.8284    | 0.8006        |
 | **Change (%)**  | 🔺 +4.35% | 🔺 +0.05% | 🔺 0.00% | 🔺 +21.75% | 🔺+0.00% | 🔻 0.00% | 🔻 +0.02% |
 
+
+
 ## Results & Findings
 
 - AIHub-trained models struggled on Field Dataset due to domain differences.
@@ -98,6 +109,8 @@ To enhance model performance, several postprocessing methods were applied:
 
 - The ensemble of UNet++ and SegFormer significantly improved road segmentation accuracy, outperforming individual models by effectively capturing both fine details and global context.
 
+
+
 ## Model Performance Comparison
 
 | Model                | Mean IoU | Pixel Accuracy | Building IoU | Road IoU | Field IoU | Forest IoU | Background IoU |
@@ -105,6 +118,8 @@ To enhance model performance, several postprocessing methods were applied:
 | Segformer B3        | 0.5305  | 0.8159        | 0.7081       | 0.5539   | 0.7557   | 0.7620    | 0.7974        |
 | Selective Ensemble  | 0.5514  | 0.8307        | 0.7357       | 0.6575   | 0.7732   | 0.7457    | 0.8110        |
 | **Improvement**     | 🔺 +2.09% | 🔺 +1.81% | 🔺 +2.76% | 🔺 +10.36% | 🔺 +1.75% | 🔻 -2.13% | 🔺 +1.71% |
+
+
 
 ## Output Format
 
@@ -120,14 +135,19 @@ To enhance model performance, several postprocessing methods were applied:
 
 ![Image](https://github.com/user-attachments/assets/f2cf08cb-d112-431d-b0a4-683d372347bf)
 
+
+
 ## Installation 
 '''
 pip install rasterio segmentation-models-pytorch torch torchvision numpy opencv-python matplotlib
 '''
 
+
+
 ## Contributors
 
 [김민서] - [as09003@naver.com / minuex]
+
 
 ## License
 
