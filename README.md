@@ -26,11 +26,13 @@ Additionally, this project aims to build a satellite imagery processing pipeline
 | Data Period (year)     | 2019 - 2020                                                                                         |
 | Count                  | 810 Pairs                                                                                           |
 
-The project uses two datasets:
 
-- AIHub Dataset: A preprocessed dataset with high segmentation accuracy.
+
+## Field_Test_Dataset
 
 - Field Dataset: A custom dataset collected for real-world testing, exhibiting domain differences from AIHub.
+- 
+![Image](https://github.com/user-attachments/assets/d0e1b9fe-47c9-489a-b69b-9563f87d2f84)
 
 
 
