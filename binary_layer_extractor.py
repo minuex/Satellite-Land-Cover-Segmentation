@@ -5,7 +5,7 @@ from PIL import Image
 
 """
 언리얼 프로세스에 사용될 형태로 가공하는 코드
-[0,1,2,3,4] -> 각 클래스 별 [0,1]의 레이어 png 형태로 저장
+[0,1,2,3,4] -> 각 클래스 별 [0,255]의 레이어 png 형태로 저장
 """
 
 input_folder = "predictions"  # 분류된 래스터 데이터가 있는 폴더
@@ -23,7 +23,7 @@ for raster_file in raster_files:
     with rasterio.open(raster_path) as src:
         classification = src.read(1)  # 첫 번째(유일한) 밴드 읽기
 
-    # 각 클래스별 이진화된 PNG 저장 (0~1)
+    # 각 클래스별 이진화된 PNG 저장
     for class_value, class_name in enumerate(class_names):
         binary_layer = (classification == class_value).astype(np.uint8) * 255
 
