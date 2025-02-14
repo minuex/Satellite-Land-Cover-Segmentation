@@ -138,8 +138,10 @@ To enhance model performance, several postprocessing methods were applied:
 
 
 ## Installation 
-'''pip install rasterio segmentation-models-pytorch torch torchvision numpy opencv-python matplotlib
-'''
+
+```bash
+pip install rasterio segmentation-models-pytorch torch torchvision numpy opencv-python matplotlib
+```
 
 
 
